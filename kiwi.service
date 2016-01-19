@@ -1,0 +1,17 @@
+[Unit]
+Description=Kiwi  agent
+Documentation=https://github.com/larsks/kiwi
+
+[Service]
+EnvironmentFile=/etc/kiwi.conf
+User=root
+PermissionsStartOnly=true
+ExecStart=/usr/sbin/kiwi  --interface=${INTERFACE}  --kube-endpoint ${KUBE_ENDPOINT}  --etcd-endpoint ${ETCD_ENDPOINT} \
+                          --etcd-prefix ${ETCD_PREFIX} --fwchain ${FWCHAIN} --fwmark ${FWMARK}  \
+                          --refresh-interval ${REFRESH_INTERVAL}  --reconnect-interval ${RECONNECT_INTERVAL}  \
+                          
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
